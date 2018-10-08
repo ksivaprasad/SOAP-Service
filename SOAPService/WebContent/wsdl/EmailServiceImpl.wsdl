@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://service.soapservice.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://service.soapservice.com" xmlns:intf="http://service.soapservice.com" xmlns:tns1="http://bean.soapservice.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://service.soapservice.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://bean.soapservice.com"/>
+   <element name="sendEmail">
+    <complexType>
+     <sequence>
+      <element name="email" type="tns1:Email"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="sendEmailResponse">
+    <complexType>
+     <sequence>
+      <element name="sendEmailReturn" type="tns1:EmailStatus"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://bean.soapservice.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <complexType name="Email">
+    <sequence>
+     <element name="body" nillable="true" type="xsd:string"/>
+     <element name="subject" nillable="true" type="xsd:string"/>
+     <element name="to" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="EmailStatus">
+    <sequence>
+     <element name="status" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="sendEmailRequest">
+
+      <wsdl:part element="impl:sendEmail" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="sendEmailResponse">
+
+      <wsdl:part element="impl:sendEmailResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="EmailServiceImpl">
+
+      <wsdl:operation name="sendEmail">
+
+         <wsdl:input message="impl:sendEmailRequest" name="sendEmailRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:sendEmailResponse" name="sendEmailResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="EmailServiceImplSoapBinding" type="impl:EmailServiceImpl">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="sendEmail">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="sendEmailRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="sendEmailResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="EmailServiceImplService">
+
+      <wsdl:port binding="impl:EmailServiceImplSoapBinding" name="EmailServiceImpl">
+
+         <wsdlsoap:address location="http://localhost:8080/SOAPService/services/EmailServiceImpl"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from EmailServiceImplService WSDL service -->
+
+  <service name="EmailServiceImpl" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://service.soapservice.com"/>
+      <parameter name="wsdlServiceElement" value="EmailServiceImplService"/>
+      <parameter name="schemaQualified" value="http://bean.soapservice.com,http://service.soapservice.com"/>
+      <parameter name="wsdlServicePort" value="EmailServiceImpl"/>
+      <parameter name="className" value="com.soapservice.service.EmailServiceImpl"/>
+      <parameter name="wsdlPortType" value="EmailServiceImpl"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://service.soapservice.com" xmlns:retNS="http://service.soapservice.com" xmlns:rtns="http://bean.soapservice.com" name="sendEmail" qname="operNS:sendEmail" returnQName="retNS:sendEmailReturn" returnType="rtns:EmailStatus" soapAction="">
+        <parameter xmlns:pns="http://service.soapservice.com" xmlns:tns="http://bean.soapservice.com" qname="pns:email" type="tns:Email"/>
+      </operation>
+      <parameter name="allowedMethods" value="sendEmail"/>
+
+      <typeMapping xmlns:ns="http://bean.soapservice.com" qname="ns:Email" type="java:com.soapservice.bean.Email" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://bean.soapservice.com" qname="ns:EmailStatus" type="java:com.soapservice.bean.EmailStatus" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>
