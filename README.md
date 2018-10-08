@@ -16,14 +16,15 @@ Steps to create wsdl file
 
 Testing
 -------
-# With Browser
+1. With Browser
 Type the url in your browser followed by '?wsdl'. You can find the url from the wsdl file.
 Eg. In my case http://localhost:8080/SOAPService/services/EmailServiceImpl?wsdl
 This will give you a xmal response
 
-# With SOAP UI
+2. With SOAP UI
 Create project in SOAP UI using the wsdl url (http://localhost:8080/SOAPService/services/EmailServiceImpl?wsdl)
 Change the input values in the input xml and send the request. The response will be displayed next to the input text area.
 
-# With client 
+3. With client 
 You can find the client code from the following link
+https://github.com/ksivaprasad/SOAP-Client.git
